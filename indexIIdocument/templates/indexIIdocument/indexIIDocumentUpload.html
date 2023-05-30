@@ -1,0 +1,130 @@
+<html>
+<head>
+    <title>File Upload | FindIndexIIDocument</title>
+</head>
+{% extends "main/header.html" %}
+
+{% block content %}
+
+<body style="background-color:#f6f8b7;">
+<div class="card content-section rounded border border-dark mt-3" style="background-color:#e2e594;">
+        <div class="card-header border border-dark shadow"  style="background-color:#e2e580;">
+            Upload Document -
+        </div>
+
+    {% if request.user.is_authenticated %}
+<!--    <h5> {{ 'UserName : ' }} <b>{{ request.user.username }}</b>.</h5>-->
+    <h4 class="mt-4"> Total Documents Uploaded : <b> {{ request.user.number_of_docs_uploaded }} </b></h4>
+<!--    <h4> Number of Free Downloads Left : <b> {{ request.user.number_of_docs_downloded }} </b></h4>-->
+    <div class="container p-3 my-3 border border-dark">
+        <form action="{% url 'uploadDocument' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group p-1">
+                <label for="inputFile"> Upload Valid Image or PDF file of IndexII Document : </label>
+                <input type="file" class="form-control-file" id="inputFile" name="inputFile" required accept="image/*,.pdf">
+                <button class="btn btn-default border-dark text-white mt-4" style="background-color:#481d01; width:205px;" type="submit" value="uploadFirst" name="upload">Upload</button>
+            </div>
+        </form>
+</div>
+
+        {% if uploaded_file_url %}
+
+        <p>File uploaded at: <a href="{{ uploaded_file_url }}">{{ uploaded_file_url }}</a></p>
+
+
+        {% comment %} {% if typeOfImg is 'pdf' %}
+        {% load static %}
+        <!--        <embed type="application/pdf"-->
+        <!--               src="{% static uploaded_file_url %}"-->
+        <!--               width="250"-->
+        <!--               height="200">-->
+
+        <!--        <iframe id="iframe_pdf" src={{ uploaded_file_url }} ></iframe>-->
+        <object type="application/pdf"
+                data="{% static uploaded_file_url %}"
+                width="250"
+                height="200">
+
+        </object>
+        {% else %}
+
+        <img src={{uploaded_file_url}} width='70%' height='80%' class="float-left" %>
+        {%endif%} {% endcomment %}
+        <div class="form-group purple-border">
+            <label for="exampleFormControlTextarea4"> OCR'd text </label>
+            <textarea class="form-control" id="exampleFormControlTextarea4" rows="10">{{ output_data }}</textarea>
+        </div>
+        <div class="container p-3 my-3 bg-primary text-white">
+            <form method='POST'>
+                {% csrf_token %}
+                <strong>Please feel free to edit the information to make it more accurate. </strong>
+                <br>
+                <label for="serialNo">Serial No / दस्त क्रमांक </label>
+                <input type="text" id="serialNo" name="serialNo" value={{ serialNo }}>
+                <br>
+
+                <label for="desc"> Description / भू-मापन, पोटहिस्सा व घरक्रमांक </label>
+                <textarea id="desc" class="form-control" rows="5" name="desc">{{ desc }}</textarea>
+                <br>
+
+
+                <label for="state">State </label>
+                <select id="state" name="state">
+                    {% for s,v in STATES %}
+                    <option value="{{s}}">{{ s }}</option>
+                    {% endfor %}
+                </select>
+
+                <br>
+
+                <!--                    <label for="district">district </label>-->
+                <!--                    <input type="text" id="district" name="district">-->
+                <br>
+
+                <div class="container md-2">
+                    <strong>Select from the list or enter manually if not found.</strong>
+                    <br>
+                    <label for="district"> District</label>
+                    <input type="text" id="district" name="district1" value="">
+                    <select id="districtlist" name="district2">
+                        {% for d in districtList %}
+                        <option value="{{d}}">{{ d }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="container md-2">
+
+                    <label for="subdistrict"> SubDistrict/taluka</label>
+                    <input type="text" id="subdistrict" name="subdistrict1" value="">
+                    <select id="subdistrictlist" name="subdistrict2">
+                        {% for d in subdistrictList %}
+                        <option value="{{d}}">{{ d }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+
+                <label for="village">village / गावाचे नाव </label>
+                <input type="text" id="village" name="village" value=" {{ village }} ">
+                <br>
+
+
+                <button type="submit" name="save" value="save" class="btn btn-success">save</button>
+            </form>
+        </div>
+
+        {% endif %}
+    </div>
+    {% else %}
+
+    <h3> 'You are a guest.'</h3>
+
+    {% endif %}
+    {% comment %} {% include 'main/SearchIndexIIForm.html' %} {% endcomment %}
+
+
+</div>
+{% endblock content %}
+</body>
+</html>

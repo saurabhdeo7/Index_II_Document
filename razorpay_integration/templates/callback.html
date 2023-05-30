@@ -1,0 +1,20 @@
+<html>
+    <head>
+        <title>Thank You | FindIndexIIDocument</title>
+    </head>
+<body style="background-color:#f6f8b7;">
+{% extends 'base.html' %}
+{% block content %}
+<div class="text-center" style="margin-top:20%">
+    {% if status == "Success" %}
+    <h2>THANK YOU...!!</h2>
+    <h3 class=""> Your Payment Has Been Received.</h3>
+    <a style="color:brown;" href="{{file}}"><button class="btn btn-default border-dark text-white mt-4" style="background-color:#481d01; width:205px;">Get Your Document</button></a><br>
+    {% comment %} <a href="home/"><button class="btn btn-secondary mt-3">Back To Home</button></a> {% endcomment %}
+    {% else %}
+    <h2>SORRY, YOUR PAYMENT HAS BEEN FAILED</h2>
+    {% endif %}
+</div>
+{% endblock %}
+</body>
+</html>

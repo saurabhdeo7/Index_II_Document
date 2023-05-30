@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Payment Form | FindIndexIIDocument</title>
+  </head>
+<body style="background-color:#f6f8b7;">
+{% extends 'base.html' %}
+{% block content %}
+<div class="col-6 mx-auto" style="margin-top:10%;">
+    <form action="{% url 'payment' %}" method='POST'>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Name</label>
+          <input type="name" name="name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail" class="form-label">Email</label>
+          <input type="email" name="email" class="form-control" id="exampleInputEmail">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputContact" class="form-label">Contact</label>
+          <input type="phone2numeric" name="contact" class="form-control" id="exampleInputContact">
+        </div>
+        <div>
+        <button type="submit" class="btn btn-default border-dark text-white mt-4" style="background-color:#481d01; width:205px;">Pay Now</button>
+        </div>
+      </form>
+</div>
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+<html>
+<head>
+    <title>Register | FindIndexIIDocument</title>
+</head>
+<body style="background-color:#f6f8b7;">
+<!-- django_project/users/templates/register.html -->
+{% extends "main/header.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="content-section border border-dark mt-4"  style="background-color:#e2e594;">
+        <form method="POST">
+            {% csrf_token %}
+            <fieldset class="form-group mb-2">
+                <h2 class="border-bottom border-dark mb-4 p-2">Join Today </h2>
+                {{ form|crispy }}
+            </fieldset>
+
+            NOTE : By registering, you accept the Terms of Service and Privacy Notice
+
+            <div class="form-group">
+                <button class="btn btn-default border-dark text-white mt-4" style="background-color:#481d01; width:205px;" type="submit">Sign Up</button>
+            </div>
+        </form>
+        <div class="border-top pt-3">
+            <small class="text-muted">
+                Already Have An Account? <a class="ml-2" style="text-decoration:underline;color:#481d01;" href="/login">Sign In</a>
+            </small>
+        </div>
+    </div>
+{% endblock content %}
+</body>
+</html>

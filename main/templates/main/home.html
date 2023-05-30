@@ -1,0 +1,27 @@
+<!-- django_project/main/templates/main/home.html-->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HOME | FindIndexIIDocument</title>
+    <style>
+        body{
+            background-color: #FFFDD0;
+        }
+    </style>
+</head>
+<body style="background-color:#f6f8b7;">
+{% extends "main/header.html" %}
+{% block content %}
+<!--This is Home Page-->
+{% if user.is_superuser %}
+<div class="alert alert-success" role="alert">
+You are logged in as {{user.first_name}}, here are the
+<a href="/admin/">admin pages</a> for changing content.
+</div>
+{% endif %}
+
+
+{% include 'indexIIdocument/SearchIndexIIForm.html' %}
+{% endblock content %}
+</body>
+</html>

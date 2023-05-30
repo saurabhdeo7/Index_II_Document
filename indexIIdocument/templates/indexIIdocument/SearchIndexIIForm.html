@@ -1,0 +1,92 @@
+
+<body>
+    
+<div id="searchForm" class="card p-3 m-3 h-2 shadow rounded border border-dark" style="background-color:#f2f3ba;">
+    <div class="card-body"> 
+        <h5 class="card-title">Search For Index-II Document</h5>
+
+        <form class="row g-4 needs-validation" novalidate method="post">
+            {% csrf_token %}
+            <div class="col-md-3">
+                <label for="state" class="form-label">State :</label>
+                <select id="state" name="state" class="form-control">
+                    {% for s,v in STATES %}
+                    <option value="{{s}}">{{ s }}</option>
+                    {% endfor %}
+                </select></div>
+
+
+            <div class="col-md-3 form-group">
+                <label for="district" class="form-label">District :</label>
+                <input type="text" name="district" id="district" class="form-control">
+            </div>
+            <div class="col-md-3 form-group">
+                <label for="subdistrict" class="form-label"> Tehsil/Sub-District : </label>
+                <input type="text" name="subdistrict" id="subdistrict" class="form-control">
+            </div>
+            <div class="col-md-3 form-group">
+                <label for="village" class="form-label">Village :</label>
+                <input type="text" name="village" id="village" class="form-control">
+            </div>
+
+            <div class="col-md-3 form-group">
+                <label for="PropertyNo" class="form-label">PropertyNo : </label>
+                <input type="text" class="form-control" id="PropertyNo" value="" name="PropertyNo" required
+                       aria-describedby="propertyNoHelpBlock">
+                <small id="propertyNoHelpBlock" class="form-text text-muted">
+                    (Enter SurveyNo./CTSNo./MilkatNo./GatNo./PlotNo.)
+                </small>
+            </div>
+
+            <div class="col-12">
+                <button class="btn border border-dark rounded mt-2 text-white" style="background-color:#481d01;" type="submit" name="searchDoc" value="searchDoc">Search Document
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!--later change for guest and logged in user-->
+{% if mydata %}
+<div class="card-body border border-dark"   style="background-color:#e2e594;">
+
+    <h5> Index II Documents Matched with Your Data as Follows - </h5>
+<div class="card-body">
+
+    <h5> Index II Documents:</h5>
+    <table class="table m-2 border border-dark p-3" >
+        <thead class="text-white" style="background-color:#481d01;">
+        <tr>
+            <th scope="col">SerialNo</th>
+            <th scope="col">Description</th>
+            <th scope="col">File</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for row in mydata %}
+        <tr>
+            <th scope="row">{{ row.serialNo }}</th>
+            <td>{{ row.description }}</td>
+            {% if user.is_superuser %}
+                 <td><a style="color:white;" href=" {{ row.fileIn }}" class="btn btn-primary">Document</a></td>
+            {% else %}
+             <form action = "{% url 'razorpay_integration' %}" method = "post">
+                {% csrf_token %}
+                <input type="hidden" value="{{ row.fileIn }}" id="fileLink" name="fileLink">
+                <td><button class="btn btn-default border-dark text-white mt-4" style="background-color:#481d01; width:100px;" type = "submit">Pay(₹200)</button></td>
+            </form>
+                {% endif %}
+           
+
+
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
+</div>
+{% endif %}
+</body>
