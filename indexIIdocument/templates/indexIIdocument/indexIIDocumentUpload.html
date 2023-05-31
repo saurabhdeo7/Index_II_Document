@@ -6,9 +6,9 @@
 
 {% block content %}
 
-<body style="background-color:#f6f8b7;">
-<div class="card content-section rounded border border-dark mt-3" style="background-color:#e2e594;">
-        <div class="card-header border border-dark shadow"  style="background-color:#e2e580;">
+<body style="background-color:#F4F4F4;">
+<div class="card content-section rounded border border-dark mt-3" style="background-color:#F4F4F4;">
+        <div class="card-header border border-dark shadow">
             Upload Document -
         </div>
 
@@ -16,13 +16,13 @@
 <!--    <h5> {{ 'UserName : ' }} <b>{{ request.user.username }}</b>.</h5>-->
     <h4 class="mt-4"> Total Documents Uploaded : <b> {{ request.user.number_of_docs_uploaded }} </b></h4>
 <!--    <h4> Number of Free Downloads Left : <b> {{ request.user.number_of_docs_downloded }} </b></h4>-->
-    <div class="container p-3 my-3 border border-dark">
+    <div class="container p-3 my-3 border border-dark" >
         <form action="{% url 'uploadDocument' %}" method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group p-1">
                 <label for="inputFile"> Upload Valid Image or PDF file of IndexII Document : </label>
                 <input type="file" class="form-control-file" id="inputFile" name="inputFile" required accept="image/*,.pdf">
-                <button class="btn btn-default border-dark text-white mt-4" style="background-color:#481d01; width:205px;" type="submit" value="uploadFirst" name="upload">Upload</button>
+                <button class="btn btn-default border-dark text-white mt-4" style="background-color:#003F72; width:205px;" type="submit" value="uploadFirst" name="upload">Upload</button>
             </div>
         </form>
 </div>

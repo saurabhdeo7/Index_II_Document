@@ -5,15 +5,15 @@
 <head>
     <title>Documents | FindIndexIIDocument</title>
 </head>
-<body style="background-color:#f6f8b7;">
+<body style="background-color:#FAF9F6;">
 <div class="card-body">
     {% if user.is_superuser == False %}
        <h4 class="mb-4"> Number of Free Downloads Left : <b> {{ request.user.number_of_docs_downloded }} </b></h4>
     {% endif %}
-    <div class="container border border-dark shadow-lg p-5">
+    <div class="container border border-dark shadow-lg p-5" style="background-color:#F4F4F4;">
     <h5 class="mb-3"> Index II Documents:</h5>
-    <table class="table m-2 p-5 border border-dark">
-        <thead class="p-2 text-white" style="background-color:#743a14;">
+    <table class="table m-2 p-5 border border-dark" >
+        <thead class="p-2 text-white" style="background-color:#003F72;">
         <tr>
             <th scope="col">SerialNo</th>
             <th scope="col">Description</th>

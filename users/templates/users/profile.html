@@ -4,11 +4,11 @@
 <head>
     <title>Profile | FindIndexIIDocument</title>
 </head>
-<body style="background-color:#f6f8b7;">
+<body style="background-color:#F4F4F4;">
 {% extends "main/header.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="content-section col-lg-12 col-md-12 col-sm-12 tutorial-style border border-dark mt-4 shadow-lg" style="background-color:#e2e594;">
+<div class="content-section col-lg-12 col-md-12 col-sm-12 tutorial-style border border-dark mt-4 shadow-lg" style="background-color:#ECECEC;">
     <legend class="border-bottom mb-4">Profile Information -</legend>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
@@ -41,7 +41,7 @@
                 <a href="{% url 'password_change' %}" style="color:#481d01;">Change password?</a>
             </fieldset>
             <div class="form-group">
-                <button class="btn btn-default border-dark text-white mt-4" style="background-color:#481d01; width:205px;" type="submit">Update</button>
+                <button class="btn btn-default border-dark text-white mt-4" style="background-color:#003F72; width:205px;" type="submit">Update</button>
             </div>
         {% endif %}
     </form>

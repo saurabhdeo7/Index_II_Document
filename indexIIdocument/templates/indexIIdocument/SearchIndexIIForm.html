@@ -1,7 +1,7 @@
 
 <body>
     
-<div id="searchForm" class="card p-3 m-3 h-2 shadow rounded border border-dark" style="background-color:#f2f3ba;">
+<div id="searchForm" class="card p-3 m-3 h-2 shadow rounded border border-dark" style="background-color:#F4F4F4;">
     <div class="card-body"> 
         <h5 class="card-title">Search For Index-II Document</h5>
 
@@ -39,7 +39,7 @@
             </div>
 
             <div class="col-12">
-                <button class="btn border border-dark rounded mt-2 text-white" style="background-color:#481d01;" type="submit" name="searchDoc" value="searchDoc">Search Document
+                <button class="btn border border-dark rounded mt-2 text-white" style="background-color:#003F72;" type="submit" name="searchDoc" value="searchDoc">Search Document
                 </button>
             </div>
         </form>
@@ -48,14 +48,14 @@
 
 <!--later change for guest and logged in user-->
 {% if mydata %}
-<div class="card-body border border-dark"   style="background-color:#e2e594;">
+<div class="card-body border border-dark"   style="background-color:#F4F4F4;">
 
     <h5> Index II Documents Matched with Your Data as Follows - </h5>
 <div class="card-body">
 
     <h5> Index II Documents:</h5>
     <table class="table m-2 border border-dark p-3" >
-        <thead class="text-white" style="background-color:#481d01;">
+        <thead class="text-white" style="background-color:#003F72;">
         <tr>
             <th scope="col">SerialNo</th>
             <th scope="col">Description</th>
@@ -74,7 +74,7 @@
              <form action = "{% url 'razorpay_integration' %}" method = "post">
                 {% csrf_token %}
                 <input type="hidden" value="{{ row.fileIn }}" id="fileLink" name="fileLink">
-                <td><button class="btn btn-default border-dark text-white mt-4" style="background-color:#481d01; width:100px;" type = "submit">Pay(₹200)</button></td>
+                <td><button class="btn btn-default border-dark text-white mt-4" style="background-color:#003F72; width:100px;" type = "submit">Pay(₹200)</button></td>
             </form>
                 {% endif %}
            
