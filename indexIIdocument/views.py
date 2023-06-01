@@ -4,6 +4,7 @@ from django.contrib import messages
 from django.shortcuts import render, redirect
 from django.http import HttpResponseBadRequest
 from django.core.files.storage import FileSystemStorage
+from django.core.paginator import Paginator
 
 # from FindIndexIIWebsite import settings
 from django.conf import settings
@@ -271,9 +272,11 @@ def deleteTmp(path):
 @superuser_only
 def allDocument(request):
     mydata = IndexIIdoc.objects.all().values()
-    print(mydata)
+    paginator = Paginator(mydata,10)
+    pagenumber = request.GET.get("page")
+    myFinalData = paginator.get_page(pagenumber)
     context = {
-        'mydata': mydata,
+        'mydata': myFinalData,
     }
     return render(request=request, template_name='indexIIdocument/dataview.html', context=context)
 
@@ -281,7 +284,13 @@ def allDocument(request):
 @login_required
 def yourDocument(request):
     mydata = IndexIIdoc.objects.filter(added_by=request.user).values()
+    paginator = Paginator(mydata,10)
+    pagenumber = request.GET.get("page")
+    myFinalData = paginator.get_page(pagenumber)
+    yourDocument = 2
     context = {
-        'mydata': mydata,
+        'mydata': myFinalData,
+        'page' : yourDocument,
     }
+    print(context['page'])
     return render(request=request, template_name='indexIIdocument/dataview.html', context=context)

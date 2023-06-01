@@ -6,6 +6,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from indexIIdocument.models import STATES, IndexIIdoc
 from users.models import CustomUser
+from django.core.paginator import Paginator
 
 mydata=""
 uploadedCount , downloadedCount = 0 , 0
@@ -50,11 +51,15 @@ def homepage(request):
         if(str(request.user) != "AnonymousUser" and str(request.user.is_superuser) != "True"):  #Changed By MSc CS Team
             mydata = mydata.filter(~Q(added_by = request.user)).values()                        #Changed By MSc CS Team
 
+    paginator = Paginator(mydata,10)
+    pagenumber = request.GET.get("page")
+    myFinalData = paginator.get_page(pagenumber)
+
     return render(request=request,
                   template_name='main/home.html',
                   context={"objects": "dummy",
                            "STATES": STATES,
-                            "mydata":mydata,
+                            "mydata":myFinalData,
                            }
                   )
 
