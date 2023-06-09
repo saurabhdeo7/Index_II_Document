@@ -36,10 +36,11 @@ def order_payment(request):
         response = client.customer.all(email)
         id = "No"
         for i in response["items"]:
-            if i["email"] == email:
+            if i["email"] == email or i["contact"] == contact:
                 id = i["id"]
                 print(id)
         if(id == "No"):
+            print("tikde")
             response = client.customer.create({
                 "name": name,
                 "contact": contact,
@@ -61,7 +62,7 @@ def order_payment(request):
             request,
             "payment.html",
             {
-                "callback_url": "http://" + "127.0.0.1:8000" + "/callback/",
+                "callback_url": "http://" + request.META['HTTP_HOST'] + "/callback/",
                 "razorpay_key": RAZORPAY_KEY_ID,
                 "order": order,
                 "custId":custId,
